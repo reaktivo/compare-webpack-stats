@@ -1,0 +1,29 @@
+{
+  "name": "compare-webpack-stats",
+  "version": "1.0.0",
+  "description": "Compares webpack stat files passed",
+  "main": "index.js",
+  "bin": {
+    "compare-webpack-stats": "bin/_compare-webpack-stats.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Marcel Miranda m@reaktivo.com",
+  "license": "MIT",
+  "dependencies": {
+    "babel-preset-travix": "^1.1.0",
+    "babel-register": "^6.14.0",
+    "chalk": "^1.1.3",
+    "yargs": "^5.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.14.0",
+    "babel-eslint": "^6.1.2",
+    "eslint": "^3.5.0",
+    "eslint-config-travix": "^1.3.0",
+    "eslint-plugin-babel": "^3.3.0",
+    "eslint-plugin-import": "^1.15.0",
+    "eslint-plugin-react": "^5.2.2"
+  }
+}
