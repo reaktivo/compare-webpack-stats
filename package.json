@@ -4,7 +4,7 @@
   "description": "Compares webpack stat files passed",
   "main": "index.js",
   "bin": {
-    "compare-webpack-stats": "bin/_compare-webpack-stats.js"
+    "compare-webpack-stats": "bin/compare-webpack-stats.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

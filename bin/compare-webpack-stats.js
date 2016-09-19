@@ -1,3 +1,5 @@
+#!/usr/bin/env node --harmony
+
 /* eslint-disable no-console, global-require */
 const readModuleFiles = require('../lib/readModuleFiles');
 const args = require('yargs')

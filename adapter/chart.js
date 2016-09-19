@@ -1,9 +1,11 @@
 /* eslint-disable no-console */
-const { readFileSync, writeFileSync } = require('fs');
-const { tmpdir } = require('os');
-const { computeModuleName, findModuleUsage } = require('../lib/stats');
-const { resolve } = require('path');
-const { execSync } = require('child_process');
+const fs = require('fs');
+const tmpdir = require('os').tmpdir;
+const stats = require('../lib/stats');
+const computeModuleName = stats.computeModuleName;
+const findModuleUsage = stats.findModuleUsage;
+const resolve = require('path').resolve;
+const execSync = require('child_process').execSync;
 
 function getTmpFilename() {
   const date = (new Date).toISOString().replace(/:/g, '');
@@ -14,11 +16,12 @@ module.exports = (modules, args = {}) => {
   const usage = findModuleUsage(modules, args);
 
   const data = [
-    ['Module'].concat(modules.map(computeModuleName)),
-    ...usage.map(({ name, size, usedBy }) => (
-      [name].concat(Array(modules.length).fill(0).fill(size, 0, usedBy.length)))
+    ['Module'].concat(modules.map(computeModuleName))
+  ].concat(
+    usage.map(module => (
+      [module.name].concat(Array(modules.length).fill(0).fill(module.size, 0, module.usedBy.length)))
     )
-  ];
+  );
 
   const CHART = {
     date: new Date(),
@@ -33,10 +36,10 @@ module.exports = (modules, args = {}) => {
     }
   };
 
-  const htmlTemplate = readFileSync(resolve(__dirname, '../assets/template.html'), 'utf8');
+  const htmlTemplate = fs.readFileSync(resolve(__dirname, '../assets/template.html'), 'utf8');
   const updatedHtmlTemplate = htmlTemplate.replace('{{ CHART }}', JSON.stringify(CHART, null, 2));
   const templatePath = args.output ? resolve(args.output) : getTmpFilename();
-  writeFileSync(templatePath, updatedHtmlTemplate, 'utf8');
+  fs.writeFileSync(templatePath, updatedHtmlTemplate, 'utf8');
   console.log(`Wrote analysis to: ${templatePath}`);
   if (args.browse) {
     execSync(`open file://localhost/${templatePath}`);
