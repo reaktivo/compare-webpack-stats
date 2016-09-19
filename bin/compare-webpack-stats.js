@@ -25,6 +25,15 @@ const args = require('yargs')
     describe: 'Output json',
     type: 'boolean',
   })
+  .option('o', {
+    alias: 'output',
+    describe: 'Output html filepath'
+  })
+  .option('b', {
+    alias: 'browse',
+    describe: 'Open charts',
+    type: 'boolean'
+  })
   .help('h')
   .alias('h', 'help')
   .argv;
@@ -36,9 +45,9 @@ const moduleUsage = findModuleUsage(...mainModules)
 ;
 
 if (args.chart) {
-  require('../adapter/chart')(mainModules, moduleUsage);
+  require('../adapter/chart')(mainModules, moduleUsage, args);
 } else if (args.json) {
-  require('../adapter/json')(mainModules, moduleUsage);
+  require('../adapter/json')(mainModules, moduleUsage, args);
 } else {
-  require('../adapter/cli')(mainModules, moduleUsage);
+  require('../adapter/cli')(mainModules, moduleUsage, args);
 }
