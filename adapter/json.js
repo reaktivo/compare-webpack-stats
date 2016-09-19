@@ -1,4 +1,7 @@
 /* eslint-disable no-console */
-module.exports = (modules, usage) => {
+const { findModuleUsage } = require('../lib/stats');
+
+module.exports = (modules, args = {}) => {
+  const usage = findModuleUsage(modules, args);
   console.log(JSON.stringify(usage, null, 2));
 };

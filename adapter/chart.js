@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 const { readFileSync, writeFileSync } = require('fs');
 const { tmpdir } = require('os');
-const { computeModuleName } = require('../lib/stats');
+const { computeModuleName, findModuleUsage } = require('../lib/stats');
 const { resolve } = require('path');
 const { execSync } = require('child_process');
 
@@ -10,7 +10,9 @@ function getTmpFilename() {
   return `${tmpdir()}/compare-webpack-stats-${date}.html`;
 }
 
-module.exports = (modules, usage, { output, browse }) => {
+module.exports = (modules, args = {}) => {
+  const usage = findModuleUsage(modules, args);
+
   const data = [
     ['Module'].concat(modules.map(computeModuleName)),
     ...usage.map(({ name, size, usedBy }) => (
@@ -33,10 +35,10 @@ module.exports = (modules, usage, { output, browse }) => {
 
   const htmlTemplate = readFileSync(resolve(__dirname, '../assets/template.html'), 'utf8');
   const updatedHtmlTemplate = htmlTemplate.replace('{{ CHART }}', JSON.stringify(CHART, null, 2));
-  const templatePath = output ? resolve(output) : getTmpFilename();
+  const templatePath = args.output ? resolve(args.output) : getTmpFilename();
   writeFileSync(templatePath, updatedHtmlTemplate, 'utf8');
   console.log(`Wrote analysis to: ${templatePath}`);
-  if (browse) {
+  if (args.browse) {
     execSync(`open file://localhost/${templatePath}`);
   }
 
