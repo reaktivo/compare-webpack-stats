@@ -19,12 +19,7 @@
     "yargs": "^5.0.0"
   },
   "devDependencies": {
-    "babel-core": "^6.14.0",
-    "babel-eslint": "^6.1.2",
     "eslint": "^3.5.0",
-    "eslint-config-travix": "^1.3.0",
-    "eslint-plugin-babel": "^3.3.0",
-    "eslint-plugin-import": "^1.15.0",
-    "eslint-plugin-react": "^5.2.2"
+    "eslint-config-travix": "^1.3.0"
   }
 }

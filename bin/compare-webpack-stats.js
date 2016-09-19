@@ -1,4 +1,4 @@
-#!/usr/bin/env node --harmony
+#!/usr/bin/env node
 
 /* eslint-disable no-console, global-require */
 const readModuleFiles = require('../lib/readModuleFiles');

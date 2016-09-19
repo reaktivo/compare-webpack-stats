@@ -12,7 +12,8 @@ function getTmpFilename() {
   return `${tmpdir()}/compare-webpack-stats-${date}.html`;
 }
 
-module.exports = (modules, args = {}) => {
+module.exports = (modules, args) => {
+  args || (args = {});
   const usage = findModuleUsage(modules, args);
 
   const data = [
