@@ -1,6 +1,6 @@
 {
   "name": "compare-webpack-stats",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Compares webpack stat files passed",
   "main": "index.js",
   "bin": {
